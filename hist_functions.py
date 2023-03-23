@@ -12,7 +12,7 @@ def create_image_path_list(path):
     return images
 
 def convert_to_grey_scale(image_path_list):
-    """Loat the images, convert images to grey scale and keep them in list"""
+    """Load the images, convert images to grey scale and keep them in list"""
     grey_images = []
     for image_path in image_path_list:
         image_temp = cv2.imread(image_path)
