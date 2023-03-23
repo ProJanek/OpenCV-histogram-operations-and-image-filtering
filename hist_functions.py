@@ -1,18 +1,18 @@
+"""Module with functions working on histogram."""
+
 import cv2
 from os import listdir
 from os.path import isfile, join
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Module with functions working on histogram 
-
 def create_image_path_list(path):
-    """Create a list of paths to images in a directory"""
+    """Create a list of paths to images in a directory."""
     images = [join(path, f) for f in listdir(path) if isfile(join(path, f))]
     return images
 
 def convert_to_grey_scale(image_path_list):
-    """Load the images, convert images to grey scale and keep them in list"""
+    """Load the images, convert images to grey scale and keep them in list."""
     grey_images = []
     for image_path in image_path_list:
         image_temp = cv2.imread(image_path)
@@ -21,7 +21,7 @@ def convert_to_grey_scale(image_path_list):
     return grey_images
 
 def histogram_stretch(image_list):
-    """Stretch the histogram for the images in the list and keep them in the list"""
+    """Stretch the histogram for the images in the list and keep them in the list."""
     hist_str_images = []
     for image in image_list:
         f_max = 0
@@ -41,7 +41,7 @@ def histogram_stretch(image_list):
     return hist_str_images
 
 def histogram_equalization(image_list):
-    """Equalize the histogram for the images in the list and keep them in the list"""
+    """Equalize the histogram for the images in the list and keep them in the list."""
     hist_equal_images = []
     for image in image_list:
         histogram = np.zeros(256, dtype=int)
@@ -69,11 +69,11 @@ def histogram_equalization(image_list):
     return hist_equal_images
 
 def save_histogram(image, filename):
-    """Save histogram for one image"""
+    """Save the histogram of one image."""
     histogram = np.zeros(256, dtype=int)
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
             histogram[image[i][j]] += 1
     ax = plt.subplot(111)
-    ax.bar(list(range(256)), histogram, color='g',)
+    ax.bar(list(range(256)), histogram, color='g')
     plt.savefig(filename)
